@@ -7,7 +7,7 @@ binary="${project_dir}/openrgb/build/openrgb"
 config_dir="/tmp/openrgb-msi-diagnostic"
 
 if [[ ! -x "${binary}" ]]; then
-    echo "Derlenmiş OpenRGB bulunamadı; önce scripts/build-openrgb.sh çalıştırın." >&2
+    echo "Built OpenRGB not found; run scripts/build-openrgb.sh first." >&2
     exit 1
 fi
 

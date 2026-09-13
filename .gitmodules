@@ -2,3 +2,6 @@
 	path = openrgb
 	url = https://gitlab.com/CalcProgrammer1/OpenRGB.git
 	branch = master
+[submodule "hardware-sync-plugin"]
+	path = hardware-sync-plugin
+	url = https://gitlab.com/OpenRGBDevelopers/OpenRGBHardwareSyncPlugin.git

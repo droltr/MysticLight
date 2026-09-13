@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  game-lighting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r game-lighting/requirements.txt
+
+      - name: Compile check
+        run: python3 -m py_compile game-lighting/game_lighting.py
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s game-lighting/tests -v
+
+      - name: Shell script syntax check
+        run: |
+          for f in scripts/*.sh; do
+            bash -n "$f"
+          done
