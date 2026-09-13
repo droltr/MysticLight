@@ -1,0 +1,3 @@
+# Local build and diagnostic output
+openrgb/build/
+*.log
