@@ -1,3 +1,14 @@
 # Local build and diagnostic output
 openrgb/build/
 *.log
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store

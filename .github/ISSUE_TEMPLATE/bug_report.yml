@@ -1,0 +1,57 @@
+name: Bug report
+description: Report a reproducible problem without including sensitive data.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. Do not publish serial numbers, usernames,
+        hostnames, local paths, network addresses, credentials, or unredacted logs.
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Run ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Repository revision
+      description: Commit hash or release; do not enter a device serial number.
+    validations:
+      required: true
+  - type: dropdown
+    id: hardware_write
+    attributes:
+      label: Does this involve a hardware write?
+      options:
+        - "No"
+        - "Yes"
+        - "Unknown"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted diagnostics
+      description: Paste only the smallest relevant and manually reviewed excerpt.
+      render: shell
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I removed credentials and personal or unique device identifiers.
+          required: true
