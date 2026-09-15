@@ -1,0 +1,14 @@
+[Unit]
+Description=OpenRGB controller and local SDK server
+Documentation=https://github.com/droltr/MysticLight
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/openrgb --startminimized --server --server-host 127.0.0.1
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target
