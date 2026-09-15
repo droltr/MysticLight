@@ -138,6 +138,24 @@ The service is maintained as a separate MIT-licensed project and included
 here as a pinned submodule. Its configuration and deployment instructions are
 in [game-lighting/README.md](game-lighting/README.md).
 
+## CoolerControl and Zalman LCD ownership
+
+CoolerControl owns fan/pump PWM and RPM control. The CoolerDash plugin and its
+external LCD writer own the Zalman cooler display and its telemetry rendering.
+OpenRGB owns only RGB LEDs, while `game-lighting` owns temperature-to-RGB and
+context profiles. These components must not write each other's interfaces.
+
+On the reference machine the expected service chain is:
+
+```text
+coolercontrold.service → cc-plugin-coolerdash.service → Zalman LCD writer
+openrgb-server.service → game-lighting.service → RGB devices
+```
+
+The LCD integration is an external dependency and must be documented with its
+installation source and rollback procedure; secrets, tokens, serials, and raw
+host-specific identifiers must never be committed.
+
 ## Known limitation
 
 The Hardware Sync plugin currently fails OpenRGB's runtime compatibility
