@@ -6,7 +6,8 @@ PartOf=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/openrgb --startminimized --server --server-host 127.0.0.1
+ExecStart=%h/.local/bin/openrgb --server --server-host 127.0.0.1
+ExecStartPost=-/usr/bin/bash -c 'for attempt in {1..40}; do /usr/bin/wmctrl -r OpenRGB -b add,hidden && exit 0; sleep 0.5; done; exit 0'
 Restart=on-failure
 RestartSec=3
 

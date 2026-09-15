@@ -9,8 +9,12 @@ report_file() {
     local path="$2"
 
     if [[ -e "${path}" || -L "${path}" ]]; then
-        printf '%s\t%s\n' "${label}" "${path}"
-        found=$((found + 1))
+        if grep -Eiq '^Hidden=true[[:space:]]*$' "${path}"; then
+            printf '%s-disabled\t%s\n' "${label}" "${path}"
+        else
+            printf '%s\t%s\n' "${label}" "${path}"
+            found=$((found + 1))
+        fi
     fi
 }
 

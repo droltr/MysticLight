@@ -98,9 +98,11 @@ bash -n scripts/*.sh
 
 OpenRGB must have exactly one login-time owner. This project uses
 `openrgb-server.service`; OpenRGB's own desktop autostart must be disabled.
-The service starts the verified build with both `--startminimized` and
-`--server`, so one process provides the tray interface and the SDK endpoint on
-`127.0.0.1:6742`.
+The service starts the verified build as both the GUI and SDK server, then
+uses `wmctrl` to minimize the OpenRGB window after it is created. One process
+therefore provides the tray interface and the SDK endpoint on
+`127.0.0.1:6742`. The explicit minimize step is used because this Qt/KDE setup
+exits cleanly when OpenRGB is launched directly with `--startminimized`.
 
 Audit the current session without changing it:
 
@@ -109,7 +111,7 @@ Audit the current session without changing it:
 ```
 
 Install the example service only after the launcher and binary described above
-exist:
+exist. The service also requires `wmctrl` on the host:
 
 ```bash
 install -Dm644 systemd/openrgb-server.service \
