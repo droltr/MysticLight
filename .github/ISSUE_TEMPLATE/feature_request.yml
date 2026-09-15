@@ -1,0 +1,37 @@
+name: Feature request
+description: Propose a scoped improvement or new capability.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What need is not covered by the current project?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the desired behavior and alternatives considered.
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Hardware communication impact
+      options:
+        - None
+        - Uses existing OpenRGB SDK behavior
+        - Changes device detection or hardware writes
+        - Unknown
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable conditions that would make this complete.
+    validations:
+      required: true

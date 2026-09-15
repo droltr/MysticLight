@@ -42,9 +42,9 @@ neither necessary nor correct.
 - Static red, green, and blue are physically verified on the selected zone.
 - The controller is redetected after OpenRGB is closed and reopened.
 - Detection and color writing work again after suspend/resume.
-- Firmware version, USB serial number, and a verbose log are attached to the
-  MR record during testing; no unnecessary personal system information is
-  shared.
+- Firmware version and a redacted verbose log are attached to the MR record
+  during testing. Unique hardware identifiers, usernames, hostnames, local
+  paths, and network addresses are removed before publication.
 
 ## Risks
 
