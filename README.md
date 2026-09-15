@@ -156,6 +156,21 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, issue, and review
 process. Report vulnerabilities privately as described in
 [SECURITY.md](SECURITY.md).
 
+## Ordered implementation roadmap
+
+- [x] Single minimized OpenRGB startup owner.
+- [x] SDK recovery, Direct temperature mode, and desktop/game profiles.
+- [x] Smooth blue → yellow → orange → red CPU temperature mapping.
+- [x] Unified startup health check and udev ownership audit.
+- [ ] Validate required device inventory and modes in the health check.
+- [ ] Add resource safeguards: deduplicated writes, bounded rates, and systemd limits.
+- [ ] Complete reboot and suspend/resume end-to-end validation.
+- [ ] Investigate this machine's GPU LED exposure through OpenRGB.
+- [ ] Integrate GPU LED conditionally after reversible live validation.
+
+Each unchecked item is developed on a topic branch and merged only through a
+passing pull request. GPU work remains last and is never a required device.
+
 OpenRGB contributions belong in a topic branch on an appropriate OpenRGB fork
 and should follow that project's upstream contribution process. This
 repository does not modify the pinned upstream submodule directly.
