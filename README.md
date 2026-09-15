@@ -33,6 +33,7 @@ hardware identifiers and unredacted diagnostic logs must not be committed.
 | `hardware-sync-plugin/` | Pinned upstream Hardware Sync plugin source |
 | `game-lighting/` | Standalone game-aware lighting service |
 | `scripts/` | Local build and redacted diagnostic helpers |
+| `systemd/` | Example user service for the single OpenRGB startup owner |
 | `docs/` | Investigation notes and acceptance criteria |
 
 ## Getting started
@@ -92,6 +93,38 @@ Shell helpers can be syntax-checked with:
 ```bash
 bash -n scripts/*.sh
 ```
+
+## Login startup
+
+OpenRGB must have exactly one login-time owner. This project uses
+`openrgb-server.service`; OpenRGB's own desktop autostart must be disabled.
+The service starts the verified build as both the GUI and SDK server, then
+uses `wmctrl` to minimize the OpenRGB window after it is created. One process
+therefore provides the tray interface and the SDK endpoint on
+`127.0.0.1:6742`. The explicit minimize step is used because this Qt/KDE setup
+exits cleanly when OpenRGB is launched directly with `--startminimized`.
+
+Audit the current session without changing it:
+
+```bash
+./scripts/audit-openrgb-startup.sh
+```
+
+Install the example service only after the launcher and binary described above
+exist. The service also requires `wmctrl` on the host:
+
+```bash
+install -Dm644 systemd/openrgb-server.service \
+  ~/.config/systemd/user/openrgb-server.service
+~/.local/bin/openrgb --autostart-disable
+systemctl --user daemon-reload
+systemctl --user disable openrgb-server.service
+systemctl --user enable --now openrgb-server.service
+```
+
+Also turn off **Start at Login** in OpenRGB settings. This prevents OpenRGB
+from recreating its desktop autostart entry on a later GUI start. Do not run a
+headless OpenRGB service and a second GUI instance against the same devices.
 
 ## Game-aware lighting
 
