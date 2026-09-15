@@ -149,23 +149,32 @@ under `/dev/hidraw*` now carry the ACL granted by the rule).
 
 ## Game-aware lighting
 
-`game-lighting/` is a small Python service that connects to
+[`game-lighting/`](https://github.com/droltr/game-lighting) is a standalone
+project, included here as a Git submodule, that connects to
 `openrgb-server.service` as an SDK client: motherboard and RAM always follow
 CPU temperature, and the keyboard/mouse do too — except while a mapped game
 is the focused window (tracked via the KDE KWin
 [FocusNotifier](https://github.com/c-massie/FocusNotifier) script), when the
-keyboard switches to a per-key layout for that game. See
-[game-lighting/README.md](game-lighting/README.md) for what was evaluated,
-what's verified, and the full design.
+keyboard switches to a per-key layout for that game. After cloning:
+
+```bash
+git submodule update --init --recursive
+```
+
+See [game-lighting/README.md](game-lighting/README.md) (or the
+[standalone repo](https://github.com/droltr/game-lighting)) for what was
+evaluated, what's verified, and the full design.
 
 Installed permanently on this machine as `~/.config/systemd/user/game-lighting.service`
-(enabled, running, connects and correctly enumerates all four device types).
-No games are mapped in `~/.config/game-lighting/config.yaml` yet — that's
-the next step, pending real game names/colors from the user.
+(enabled, running). Real key layouts are configured and verified live for
+**CS2** and **Factorio** in `~/.config/game-lighting/config.yaml` (WASD
+green in both; see the game-lighting README for the rest).
 
 ## License
 
-The original content of this repository (scripts, docs, and the
-game-lighting service) is available under the [MIT License](LICENSE).
-`openrgb/` and `hardware-sync-plugin/` are upstream projects included as Git
-submodules and remain under their own GPL-2.0 licenses.
+The original content of this repository (scripts and docs) is available
+under the [MIT License](LICENSE). `openrgb/` and `hardware-sync-plugin/` are
+upstream projects included as Git submodules and remain under their own
+GPL-2.0 licenses. [`game-lighting/`](https://github.com/droltr/game-lighting)
+is a separate MIT-licensed project by the same author, also included as a
+submodule.
